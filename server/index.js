@@ -23,7 +23,7 @@ connection.once("open", () => {
 })
 
 
-const URL = 'mongodb+srv://IshanKalpadith:ish123@researchprojectmanageme.n1iby.mongodb.net/Project_Management_Tool?retryWrites=true&w=majority';
+const URL = 'mongodb+srv://TharushiMadushani:Tharu123@researchprojectmanageme.n1iby.mongodb.net/Project_Management_Tool?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
 
 await mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
