@@ -1,6 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-
 import users from '../models/users.js';
 
 const router = express.Router();
@@ -28,9 +27,9 @@ export const getuser = async (req, res) => {
 }
 
 export const adduser = async (req, res) => {
-    const { user_id, user_role, user_email, user_password} = req.body;
+    const {user_id, user_Fname, user_Lname, user_designation, user_role, user_phone, user_email, user_password, student_id, student_grpid, assigned_groups} = req.body;
 
-    const newusers = new users({ user_id, user_role, user_email, user_password })
+    const newusers = new users({user_id, user_Fname, user_Lname, user_designation, user_role, user_phone, user_email, user_password, student_id, student_grpid, assigned_groups})
 
     try {
         await newusers.save();
@@ -43,11 +42,11 @@ export const adduser = async (req, res) => {
 
 export const updateuser = async (req, res) => {
     const { id } = req.params;
-    const {  user_id, user_role, user_email, user_password } = req.body;
+    const {user_id, user_Fname, user_Lname, user_designation, user_role, user_phone, user_email, user_password, student_id, student_grpid, assigned_groups} = req.body;
     
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No user with id: ${id}`);
 
-    const updateduser = {  user_id, user_role, user_email, user_password, _id: id };
+    const updateduser = {user_id, user_Fname, user_Lname, user_designation, user_role, user_phone, user_email, user_password, student_id, student_grpid, assigned_groups, _id: id };
 
     await users.findByIdAndUpdate(id, updateuser, { new: true });
 
@@ -61,7 +60,7 @@ export const deleteuser = async (req, res) => {
 
     await users.findByIdAndRemove(id);
 
-    res.json({ message: "Post deleted successfully." });
+    res.json({ message: "User deleted successfully." });
 }
 
 
