@@ -1,0 +1,16 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+
+.App {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.Hello {
+    color: blue;
+}
+
+
+.text-link{
+    text-decoration: none !important;
+    color: inherit !important;
+}

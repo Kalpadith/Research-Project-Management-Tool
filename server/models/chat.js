@@ -1,19 +1,23 @@
 import mongoose from 'mongoose';
 
 const chatSchema = mongoose.Schema({
-    studentGroupId: {
-        type: String,
+    studentGroup:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "researchProject",
         required: true
     },
-    userId: {
-        type: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
         required: true
     },
     message: {
         type: String,
         required: true
     }
-})
+}, {
+    timestamps: true
+});
 
 const Chats = mongoose.model('chat', chatSchema);
 
