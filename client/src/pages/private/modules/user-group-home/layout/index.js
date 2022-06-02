@@ -30,6 +30,8 @@ import axios from "axios";
 import store from '@core/store';
 import {add} from "../group-user-home.reducer";
 
+import CurrentUserDetails from '../../../components/current-user-details';
+
 const drawerWidth = 260;
 
 const Main = styled('main', {shouldForwardProp: (prop) => prop !== 'open'})(
@@ -117,24 +119,29 @@ export default function Layout() {
             <>
                 <List>
 
+                <Link to='./Request_Supervisor' className='text-link'>
                     <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
                                 <ScheduleSendIcon/>
                             </ListItemIcon>
-                            <ListItemText primary={'Request Supervisor'}/>
+                            <ListItemText primary={'Request Supervisor / Co-Supervisor'}/>
                         </ListItemButton>
                     </ListItem>
+                    </Link>
 
+                <Link to='./Reg_Research_Topic' className='text-link'>
                     <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
                                 <ScheduleSendIcon/>
                             </ListItemIcon>
-                            <ListItemText primary={'Request Co-Supervisor'}/>
+                            <ListItemText primary={'Register Research Topic '}/>
                         </ListItemButton>
                     </ListItem>
+                    </Link>
 
+                    <Link to='./Submit' className='text-link'>
                     <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
@@ -143,7 +150,7 @@ export default function Layout() {
                             <ListItemText primary={'Submission'}/>
                         </ListItemButton>
                     </ListItem>
-
+                    </Link>
 
                 </List>
             </>
@@ -277,6 +284,7 @@ export default function Layout() {
             <Main open={open}>
                 <DrawerHeader/>
                 <Outlet/>
+                <CurrentUserDetails/>
             </Main>
         </Box>
     );
