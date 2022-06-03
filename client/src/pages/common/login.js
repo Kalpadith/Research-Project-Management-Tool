@@ -6,8 +6,8 @@ import {Button} from "@mui/material";
 
 const Login = () => {
     // JUST FOR DEV SPREED
-    const [email, setEmail] = useState("thusithanjana.t@sliit.lk");
-    const [password, setPassword] = useState("D59878r6");
+    const [email, setEmail] = useState("bhagyanie.c@sliit.lk");
+    const [password, setPassword] = useState("B58146i9");
 
     const navigate = useNavigate()
 
@@ -23,8 +23,6 @@ const Login = () => {
         });
         if (result.status === 200) {
 
-            // USE SWITCH CASE FOR OTHER ROLES
-
             sessionStorage.setItem('user', JSON.stringify(result.data));
             sessionStorage.setItem('email', email);
             if (result.data.user_role === 'admin'){
@@ -36,7 +34,6 @@ const Login = () => {
                 navigate('/supervisor')
             }
             else {
-                // JUST FOR TESTING
                 sessionStorage.setItem('role', 'student');
                 navigate('/student')
             }

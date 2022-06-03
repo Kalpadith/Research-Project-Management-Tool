@@ -18,6 +18,8 @@ import GroupDetails from "./pages/private/modules/user-group-home/pages/group-de
 import {Groups} from "./pages/private/modules/user-group-home/pages/RejectOrAccept";
 import {Submissions} from "./pages/private/modules/user-group-home/pages/submissions";
 import {Evaluations} from "./pages/private/modules/user-group-home/pages/group-details";
+import Details from "./pages/private/modules/user-group-home/pages/Details";
+import ViewSubmissions from "./pages/private/modules/user-group-home/pages/submissions/ViewSubmission";
 
 
 
@@ -34,6 +36,7 @@ const App = () => {
                 <Route path="/admin" element={<Admin/>} />
 
                 <Route path="/user-group/:id" element={<Layout />}>
+                    <Route index element={<Details />} />
                     <Route path="chat" element={<Chat />} />
                     <Route path="Reg_Research_Topic" element={<Reg_Research_Topic/>}/>
                     <Route path="Request_Supervisor" element={<Request_Supervisor/>}/>
@@ -42,6 +45,7 @@ const App = () => {
                     <Route path="evaluation" element={<Evaluation />} />
                     <Route path="submissions" element={<Submissions />} />
                     <Route path="group-details" element={<Evaluations />} />
+                    <Route path="submission-list" element={<ViewSubmissions />} />
                 </Route>
 
                 <Route path="user-list" element={<Admin_layout/>}/>

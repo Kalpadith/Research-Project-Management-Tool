@@ -3,6 +3,8 @@ import {forwardRef, useEffect, useImperativeHandle, useState} from "react";
 import axios from "axios";
 import {Modal} from "react-bootstrap";
 import AddOrUpdate from "./AddOrUpdate";
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 
 // import Button from '@mui/material/Button';
@@ -21,35 +23,24 @@ import AddOrUpdate from "./AddOrUpdate";
 // const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 
-const ViewSubmissions = forwardRef((props, ref) => {
+const ViewSubmissions = () => {
 
     const [open, setOpen] = React.useState(false);
-    // const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+    const [selectedValue, setSelectedValue] = React.useState({});
 
-    const handleClickOpen = () => {
+    const handleClickOpen = (value) => {
         setOpen(true);
+        setSelectedValue(value);
     };
 
     const handleClose = (value) => {
         setOpen(false);
-        setSelectedValue(value);
+        fetchData().then();
     };
 
 
-
-
-
-
     const [submissiontypes, setSubmissiontypes] = useState([]);
-    const [submission, setSubmission] = useState({});
 
-
-    useImperativeHandle(ref, () => ({
-        callSubmissionList() {
-            fetchData().then()
-        }
-
-    }));
 
     useEffect(() => {
         fetchData().then();
@@ -57,30 +48,19 @@ const ViewSubmissions = forwardRef((props, ref) => {
 
 
     async function fetchData() {
-        const result = await axios.get('/submissiontypes');
+        const result = await axios.get('/submissionType');
         if (result.status === 200) {
             setSubmissiontypes(result.data);
         }
     }
 
     const deleteSubmission = async (id) => {
-        const result = await axios.delete(`/submissiontypes?id=${id}`);
+        const result = await axios.delete(`/submissionTypes?id=${id}`);
         if (result.status === 200) {
             await fetchData();
         }
     };
 
-    async function showModal(event, submission) {
-        event.preventDefault();
-        setSubmission(submission);
-        handleShow();
-    }
-
-    async function hideModel() {
-        handleClose();
-        setSubmissiontypes({});
-        fetchData().then();
-    }
 
     return (
         <>
@@ -94,7 +74,7 @@ const ViewSubmissions = forwardRef((props, ref) => {
                         <th scope="col">Document</th>
                         <th scope="col">Due Date</th>
                         <th scope="col">Submission</th>
-                        <th scope="col">Student Group No</th>
+                        <th scope="col">Marks</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -108,20 +88,12 @@ const ViewSubmissions = forwardRef((props, ref) => {
                                     <td>{x.document}</td>
                                     <td>{x.due_date}</td>
                                     <td>{x.submission}</td>
-                                    <td>{x.studentgroup_no}</td>
-
+                                    <td> <span className={x?.marks > 50 ? 'text-success' : 'text-danger'} ><b>{x?.marks}</b></span> </td>
 
                                     <td>
-                                        {/*<button className="btn btn-warning" onClick={(e) => showModal(e, x)}>*/}
-                                        {/*    <i className="las la-edit"/>*/}
-                                        {/*</button>*/}
-                                        {/*<button className="m-2 btn btn-danger" onClick={() => deleteSubmission(x?._id)}>*/}
-                                        {/*    <i className="las la-trash"/>*/}
-                                        {/*</button>*/}
-                                        <button className="btn btn-success"> <a href="/user-group/6267859b42903af98a604116/evaluation" style={{ textDecoration: 'none', color: 'black' }}>Evaluate</a></button>
-                                        {/*<Button variant="outlined" onClick={handleClickOpen}>*/}
-                                        {/*    Open simple dialog*/}
-                                        {/*</Button>*/}
+                                        <Button variant="outlined" onClick={() => handleClickOpen(x)}>
+                                            Evaluate
+                                        </Button>
 
                                     </td>
                                 </tr>
@@ -133,70 +105,86 @@ const ViewSubmissions = forwardRef((props, ref) => {
             </div>
 
 
+            <EvaluationDialog
+                selectedValue={selectedValue}
+                open={open}
+                onClose={handleClose}
+            />
 
-            {/*<SimpleDialog*/}
-            {/*    selectedValue={selectedValue}*/}
-            {/*    open={open}*/}
-            {/*    onClose={handleClose}*/}
-            {/*/>*/}
-
-
-            {/*<Modal show={show} onHide={handleClose}>*/}
-            {/*    <Modal.Header closeButton>*/}
-            {/*        <Modal.Title>Update Evaluation</Modal.Title>*/}
-            {/*    </Modal.Header>*/}
-            {/*    <Modal.Body>*/}
-            {/*        <AddOrUpdate submissions={submission} hideModel={hideModel}/>*/}
-            {/*    </Modal.Body>*/}
-            {/*</Modal>*/}
         </>
 
     )
 
 
-});
+};
 
 
-//
-// function SimpleDialog(props) {
-//     const { onClose, selectedValue, open } = props;
-//
-//     const handleClose = () => {
-//         onClose(selectedValue);
-//     };
-//
-//     const handleListItemClick = (value) => {
-//         onClose(value);
-//     };
-//
-//     return (
-//         <Dialog onClose={handleClose} open={open}>
-//             <DialogTitle>Set backup account</DialogTitle>
-//             <List sx={{ pt: 0 }}>
-//                 {emails.map((email) => (
-//                     <ListItem button onClick={() => handleListItemClick(email)} key={email}>
-//                         <ListItemAvatar>
-//                             <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-//                                 <PersonIcon />
-//                             </Avatar>
-//                         </ListItemAvatar>
-//                         <ListItemText primary={email} />
-//                     </ListItem>
-//                 ))}
-//
-//                 <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
-//                     <ListItemAvatar>
-//                         <Avatar>
-//                             <AddIcon />
-//                         </Avatar>
-//                     </ListItemAvatar>
-//                     <ListItemText primary="Add account" />
-//                 </ListItem>
-//             </List>
-//         </Dialog>
-//     );
-// }
-//
+function EvaluationDialog(props) {
+    const {onClose, selectedValue, open} = props;
+    const [marks, setMarks] = useState("");
+    const [comment, setComment] = useState("");
+
+
+    const handleClose = () => {
+        onClose();
+    };
+
+    function validateForm() {
+        return marks.length > 0 && comment.length > 0 ;
+    }
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+       await axios.post('/submissionType/evaluation', {
+            id: selectedValue._id,
+            marks: marks,
+            comment: comment
+        });
+        handleClose();
+    }
+
+    return (
+        <Dialog onClose={handleClose} open={open}>
+            <DialogTitle>Add Evaluations</DialogTitle>
+            <DialogContent>
+
+                <form className='mt-3' onSubmit={handleSubmit}>
+
+                    <div className="mb-3">
+                        <label className="form-label">marks</label>
+                        <input className="form-control" type="number"
+                               value={selectedValue?.marks}
+                               onChange={(e) => setMarks(e.target.value)}/>
+                    </div>
+
+
+                    <div className="mb-3">
+                        <label className="form-label">comment</label>
+                        <input className="form-control" type="String"
+                               value={selectedValue?.comment}
+                               onChange={(e) => setComment(e.target.value)}/>
+                    </div>
+
+
+                    {/*<Button type="submit" className="btn btn-primary w-100"*/}
+                    {/*        disabled={!validateForm()}*/}
+                    {/*        variant="contained">*/}
+                    {/*    Submit*/}
+                    {/*</Button>*/}
+                    <DialogActions>
+                        <Button disabled={!validateForm()} onClick={handleSubmit}> Add </Button>
+                        <Button onClick={handleClose} autoFocus>
+                            Close
+                        </Button>
+                    </DialogActions>
+                </form>
+
+            </DialogContent>
+
+        </Dialog>
+    );
+}
+
 
 //
 // SimpleDialog.propTypes = {
@@ -204,7 +192,6 @@ const ViewSubmissions = forwardRef((props, ref) => {
 //     open: PropTypes.bool.isRequired,
 //     selectedValue: PropTypes.string.isRequired,
 // };
-
 
 
 export default ViewSubmissions;

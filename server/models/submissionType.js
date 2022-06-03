@@ -28,7 +28,16 @@ const submissionTypeSchema = mongoose.Schema({
         required: true   
     },
     document :[Object],
-    submission:[Object]
+
+    marks: {
+        type: String,
+        required: true
+    },
+    comment: {
+        type: String,
+        required: true
+    }
+
 })
 
 var submissionType = mongoose.model('submissionType', submissionTypeSchema);
