@@ -6,6 +6,21 @@ import cors from 'cors';
 
 import userRoutes from './routes/user_r.js'
 import chatsRoutes from './routes/chats_r.js'
+// import evaluation from './routes/evaluation_r.js'
+// import researchRoutes from './routes/research_r.js'
+// import groupRoutes from './routes/group_r.js'
+import submissionRoutes from './routes/submission_r.js'
+// import http from 'http';
+// import { Server } from "socket.io";
+// import Chats from "./models/chat.js";
+// const app = express()
+//     , httpServer = http.createServer(app)
+//     , io = new Server(httpServer,{
+//         cors:{
+//             origin: "*",
+//             methods: "*"
+//         }
+// });
 import evaluation from './routes/evaluation_r.js'
 import researchRoutes from './routes/research_r.js'
 import groupRoutes from './routes/group_r.js'
@@ -39,7 +54,14 @@ app.use('/marking', markingRoutes);
 app.use('/submissionType', submissiontypeRoutes);
 
 
-const URL = 'mongodb+srv://IshanKalpadith:tKi26393IIReumKR@researchprojectmanageme.n1iby.mongodb.net/Project_Management_Tool?retryWrites=true&w=majority';
+// app.use('/evaluations', evaluation);
+// app.use('/addEvaluation', evaluation);
+// app.use('/research', researchRoutes);
+// app.use('/groups', groupRoutes);
+app.use('/submissiontypes',submissionRoutes)
+
+
+const URL = 'mongodb+srv://TharushiMadushani:Tharu123@researchprojectmanageme.n1iby.mongodb.net/Project_Management_Tool?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
 
 

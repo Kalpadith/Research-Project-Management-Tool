@@ -1,4 +1,7 @@
 import Users from '../models/users.js';
+import mongoose from "mongoose";
+import ResearchProject from "../models/researchProject.js";
+import SubmissionType from "../models/submissionType.js";
 
 export const assignUserForGroup = async (req, res) => {
     const {group_id, user_id} = req.body;
@@ -49,4 +52,20 @@ export const getUserGroups = async (req, res) => {
         console.log(error);
         res.status(400).json({message: error.message});
     }
+}
+
+export const acceptTopic = async (req, res) => {
+    const { id } = req.body;
+
+    try {
+        const sub = await ResearchProject.findById(id);
+        sub.supervisor_approval = 'Approved';
+        await ResearchProject.findByIdAndUpdate(id, sub, {new: true});
+
+        res.status(200).json(sub);
+    }catch(error){
+        res.status(404).json({message: error.message});
+    }
+
+
 }

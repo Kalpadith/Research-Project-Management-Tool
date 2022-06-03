@@ -13,6 +13,14 @@ import AddOrUpdateUser from "./pages/private/components/AddorUpdateUser";
 import Request_Supervisor from "./pages/private/components/Req_Supervisor"
 import Reg_Research_Topic from "./pages/private/components/Reg_research_topic";
 import Submit from "./pages/private/components/Submission";
+import Evaluation from "./pages/private/modules/user-group-home/pages/Evaluation";
+import GroupDetails from "./pages/private/modules/user-group-home/pages/group-details";
+import {Groups} from "./pages/private/modules/user-group-home/pages/RejectOrAccept";
+import {Submissions} from "./pages/private/modules/user-group-home/pages/submissions";
+import {Evaluations} from "./pages/private/modules/user-group-home/pages/group-details";
+import Details from "./pages/private/modules/user-group-home/pages/Details";
+import ViewSubmissions from "./pages/private/modules/user-group-home/pages/submissions/ViewSubmission";
+
 
 
 
@@ -26,19 +34,23 @@ const App = () => {
                 <Route path="/supervisor" element={<Supervisor />} />
                 <Route path="/student" element={<Student />} />
                 <Route path="/admin" element={<Admin/>} />
-              
-                <Route path="/user-group/:id" element={<Layout />}>   
+
+                <Route path="/user-group/:id" element={<Layout />}>
+                    <Route index element={<Details />} />
                     <Route path="chat" element={<Chat />} />
                     <Route path="Reg_Research_Topic" element={<Reg_Research_Topic/>}/>
                     <Route path="Request_Supervisor" element={<Request_Supervisor/>}/>
                     <Route path="Submit" element={<Submit/>}/>
+                    <Route path="RejectOrAccept" element={<Groups />} />
+                    <Route path="evaluation" element={<Evaluation />} />
+                    <Route path="submissions" element={<Submissions />} />
+                    <Route path="group-details" element={<Evaluations />} />
+                    <Route path="submission-list" element={<ViewSubmissions />} />
                 </Route>
 
                 <Route path="user-list" element={<Admin_layout/>}/>
                 <Route path="all" element={<AllUsers/>}/>
                 <Route path="add" element={<AddOrUpdateUser/>}/>
-            
-            
                 <Route path="*" element={<Login />} />
 
             </Routes>
@@ -48,4 +60,3 @@ const App = () => {
 
 
 export default App;
- 
