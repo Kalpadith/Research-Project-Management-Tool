@@ -24,15 +24,15 @@ const Student = () =>{
 
 
 
-    return (<>
+    return (<> 
+    
+    <h1>Student</h1>
+    <UserPersonalDetails/>
 
-        <h1>Student</h1>
-        <UserPersonalDetails/>
+    <div>
 
-        <div>
-
-            <UserGroup group={group}/>
-        </div>
+    <UserGroup group={group}/>
+    </div>
     </>)
 }
 

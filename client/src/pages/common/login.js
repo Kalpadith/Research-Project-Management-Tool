@@ -6,8 +6,8 @@ import {Button} from "@mui/material";
 
 const Login = () => {
     // JUST FOR DEV SPREED
-    const [email, setEmail] = useState("bhagyanie.c@sliit.lk");
-    const [password, setPassword] = useState("B58146i9");
+    const [email, setEmail] = useState("thusithanjana.t@sliit.lk");
+    const [password, setPassword] = useState("D59878r6");
 
     const navigate = useNavigate()
 
@@ -27,15 +27,17 @@ const Login = () => {
 
             sessionStorage.setItem('user', JSON.stringify(result.data));
             sessionStorage.setItem('email', email);
-            if (result.data.user_role === 'supervisor'){
+            if (result.data.user_role === 'admin'){
+                sessionStorage.setItem('role', 'admin');
+                navigate('/admin')
+            }
+            else if (result.data.user_role === 'supervisor'){
                 sessionStorage.setItem('role', 'supervisor');
                 navigate('/supervisor')
             }
             else {
                 // JUST FOR TESTING
                 sessionStorage.setItem('role', 'student');
-                // navigate('/user-group/6267859b42903af98a604116')
-                //  navigate('/user-group/student')
                 navigate('/student')
             }
 

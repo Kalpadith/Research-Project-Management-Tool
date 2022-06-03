@@ -38,7 +38,7 @@ const Supervisor = () => {
 
                     <div className="navbar-nav">
                         <a className="nav-link active" aria-current="page" href="#">
-                            <b> Hi {user.user_Fname} </b>
+                            <b> Hi {user?.user_Fname} </b>
                             <br/>
                             <small className='small'> Welcome back </small>
                         </a>

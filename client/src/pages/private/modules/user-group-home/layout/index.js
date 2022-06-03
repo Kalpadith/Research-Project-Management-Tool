@@ -30,6 +30,8 @@ import axios from "axios";
 import store from '@core/store';
 import {add} from "../group-user-home.reducer";
 
+import CurrentUserDetails from '../../../components/current-user-details';
+
 const drawerWidth = 260;
 
 const Main = styled('main', {shouldForwardProp: (prop) => prop !== 'open'})(
@@ -117,37 +119,29 @@ export default function Layout() {
             <>
                 <List>
 
-                    <Link to={'./group-details'} className='text-link'>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <SummarizeIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary={'Marks Details'}/>
-                            </ListItemButton>
-                        </ListItem>
+                <Link to='./Request_Supervisor' className='text-link'>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <ScheduleSendIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Request Supervisor / Co-Supervisor'}/>
+                        </ListItemButton>
+                    </ListItem>
                     </Link>
 
-
-
+                <Link to='./Reg_Research_Topic' className='text-link'>
                     <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
                                 <ScheduleSendIcon/>
                             </ListItemIcon>
-                            <ListItemText primary={'Request Supervisor'}/>
+                            <ListItemText primary={'Register Research Topic '}/>
                         </ListItemButton>
                     </ListItem>
+                    </Link>
 
-                    <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <ScheduleSendIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary={'Request Co-Supervisor'}/>
-                        </ListItemButton>
-                    </ListItem>
-
+                    <Link to='./Submit' className='text-link'>
                     <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
@@ -156,7 +150,7 @@ export default function Layout() {
                             <ListItemText primary={'Submission'}/>
                         </ListItemButton>
                     </ListItem>
-
+                    </Link>
 
                 </List>
             </>
@@ -168,41 +162,8 @@ export default function Layout() {
             <>
 
 
-
-
-
                 <List>
-                    <Link to='./RejectOrAccept' className='text-link'>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <ChatIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary={'Reject Or Accept'}/>
-                            </ListItemButton>
-                        </ListItem>
-                    </Link>
-                </List>
 
-
-
-
-
-                <Link to='./submissions' className='text-link'>
-                    <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <AutoAwesomeMotionIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary={'Submissions'}/>
-                        </ListItemButton>
-                    </ListItem>
-                </Link>
-
-
-
-                <List>
-                   <Link to={'./evaluation'} className='text-link'>
                     <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
@@ -211,20 +172,11 @@ export default function Layout() {
                             <ListItemText primary={'Evaluation'}/>
                         </ListItemButton>
                     </ListItem>
-                    </Link>
+
                 </List>
 
 
-
-
-
-
-
             </>
-
-
-
-
         )
     }
 
@@ -286,50 +238,31 @@ export default function Layout() {
                 </DrawerHeader>
                 <Divider/>
                 <List>
-                    {/* <Link to={'./supervisorDetails'} className='text-link'>
+                    <Link to={'/user-group/'+id} className='text-link'>
                     <ListItem disablePadding>
                         <ListItemButton>
-                           <ListItemIcon>
-                               <SummarizeIcon/>
-                           </ListItemIcon>
-                           <ListItemText primary={'Details'}/>
-                       </ListItemButton>
+                            <ListItemIcon>
+                                <SummarizeIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Details'}/>
+                        </ListItemButton>
                     </ListItem>
-                </Link>
- */}
+                    </Link>
 
-
-
-
-
-
-                     {/* <ListItem disablePadding>
+                    <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
                                 <SettingsApplicationsIcon/>
                             </ListItemIcon>
                             <ListItemText primary={'Settings'}/>
                         </ListItemButton>
-                    </ListItem> */}
-                </List> 
+                    </ListItem>
+                </List>
                 <Divider/>
 
                 {userRole === 'supervisor' ? supervisorNav() : studentNav()}
 
                 <Divider/>
-
-
-                {/*<Link to='./submission' className='text-link'>*/}
-                {/*<ListItem disablePadding>*/}
-                {/*    <ListItemButton>*/}
-                {/*        <ListItemIcon>*/}
-                {/*            <AutoAwesomeMotionIcon/>*/}
-                {/*        </ListItemIcon>*/}
-                {/*        <ListItemText primary={'Submission'}/>*/}
-                {/*    </ListItemButton>*/}
-                {/*</ListItem>*/}
-                {/*</Link>*/}
-
 
                 <List>
                     <Link to='./chat' className='text-link'>
@@ -345,16 +278,13 @@ export default function Layout() {
                 </List>
 
 
-
-
-
-
             </Drawer>
 
 
             <Main open={open}>
                 <DrawerHeader/>
                 <Outlet/>
+                <CurrentUserDetails/>
             </Main>
         </Box>
     );

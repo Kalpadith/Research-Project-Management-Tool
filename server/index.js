@@ -21,6 +21,23 @@ const app = express()
             methods: "*"
         }
 });
+import evaluation from './routes/evaluation_r.js'
+import researchRoutes from './routes/research_r.js'
+import groupRoutes from './routes/group_r.js'
+import markingRoutes from './routes/marking_r.js'
+import submissiontypeRoutes from './routes/submissionType_r.js'
+
+import http from 'http';
+import { Server } from "socket.io";
+import Chats from "./models/chat.js";
+const app = express()
+    , httpServer = http.createServer(app)
+    , io = new Server(httpServer,{
+        cors:{
+            origin: "*",
+            methods: "*"
+        }
+});
 
 
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
@@ -30,6 +47,12 @@ app.use(cors());
 
 app.use('/users', userRoutes);
 app.use('/chats', chatsRoutes);
+app.use('/evaluations', evaluation);
+app.use('/research', researchRoutes);
+app.use('/groups', groupRoutes);
+app.use('/marking', markingRoutes);
+app.use('/submissionType', submissiontypeRoutes);
+
 app.use('/evaluations', evaluation);
 app.use('/addEvaluation', evaluation);
 app.use('/research', researchRoutes);
