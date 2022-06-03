@@ -34,7 +34,9 @@ const Login = () => {
             else {
                 // JUST FOR TESTING
                 sessionStorage.setItem('role', 'student');
-                navigate('/user-group/6267859b42903af98a604116')
+                // navigate('/user-group/6267859b42903af98a604116')
+                //  navigate('/user-group/student')
+                navigate('/student')
             }
 
         }

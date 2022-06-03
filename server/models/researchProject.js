@@ -3,24 +3,24 @@ import mongoose from 'mongoose';
 const researchProjectSchema = mongoose.Schema({
 
     researchgrp_id: {
-        type: String,
-        required: true
+        type: String
+
     },
     research_name: {
-        type: String,
-        required: true
+        type: String
+
     },
     requested_supervisor: {
-        type: String,
-        required: true
+        type: String
+
     },
     topic_approval: {
-        type: String,
-        required: true
+        type: String
+
     },
     supervisor_approval: {
-        type: String,
-        required: true
+        type: String
+
     }
 })
 
