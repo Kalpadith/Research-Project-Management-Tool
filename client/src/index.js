@@ -6,7 +6,7 @@ import axios from "axios";
 
 import {Provider} from 'react-redux';
 
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = window.location.origin;
 
 
 import index from './@core/store';
