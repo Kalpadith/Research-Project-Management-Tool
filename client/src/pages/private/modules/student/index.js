@@ -1,11 +1,11 @@
 import * as React from "react";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import UserPersonalDetails from "../../components/user-personal-details";
 import UserGroup from "../../components/user-group";
 import axios from "axios";
 
 
-const Student = () =>{
+const Student = () => {
 
 
 
@@ -24,15 +24,18 @@ const Student = () =>{
 
 
 
-    return (<> 
-    
-    <h1>Student</h1>
-    <UserPersonalDetails/>
+    return (<>
 
-    <div>
-
-    <UserGroup group={group}/>
-    </div>
+        <center>
+            <br /><br />
+            <h1>Hello Student</h1>
+            <h3>Welcome to Research Management Tool</h3>
+            <br /><br />
+            <UserPersonalDetails />
+            <div>
+                <UserGroup group={group} />
+            </div>
+        </center>
     </>)
 }
 
