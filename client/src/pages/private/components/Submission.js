@@ -10,9 +10,11 @@ const Submit = () => {
     
     
     const [id, setId] = useState("");
-    const [researchgrp_id, setResearchgrp_id] = useState("");
+    const [studentgroup_no, setstudentgroup_no] = useState("");
     const [submit_id, setSubmit_id] = useState("");
     const [requested_supervisor, setRequested_supervisor] = useState("");
+    const [Submission_category, setSubmission_category] = useState("");
+    const [File, setFile] = useState("");
     ;
 
 
@@ -21,11 +23,13 @@ const Submit = () => {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        const result = await axios.post('/users/', {
+        const result = await axios.post('/submissionType/', {
             id: id,
-            researchgrp_id: researchgrp_id,
+            studentgroup_no: studentgroup_no,
             submit_id: submit_id,
-            requested_supervisor: requested_supervisor
+            requested_supervisor: requested_supervisor,
+            Submission_category: Submission_category,
+            File: File
         });
 
         if (result.status === 200 && result.data.success) {
@@ -45,11 +49,9 @@ const Submit = () => {
 
 
     return (
-        <div className="container d-flex justify-content-center align-items-center" style={{
+        <div className="container" style={{
             width: '450px',
             height: '100vh',
-
-
         }}>
             
             <div>
@@ -63,8 +65,9 @@ const Submit = () => {
                     justifyContent:'center'}}>
                     
                        
-                        <input type={'File'} style={{marginTop :"6px"}} ></input>
+                        <input type={'File'} value={File} style={{marginTop :"6px" }} onChange={(e) => setFile(e.target.value)} ></input>
 
+                        <br/>
                         <form className='mt-3' onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <div className="mb-3">
@@ -78,9 +81,9 @@ const Submit = () => {
                               
                             <label className="form-label">Research Group ID</label>
                             <input className="form-control" autoFocus
-                                   type="researchgrp_id"
-                                   value={researchgrp_id}
-                                   onChange={(e) => setResearchgrp_id(e.target.value)}/>
+                                   type="studentgroup_no"
+                                   value={studentgroup_no}
+                                   onChange={(e) => setstudentgroup_no(e.target.value)}/>
 
 
                             {/* <label className="form-label">Submission Type</label>
@@ -90,10 +93,10 @@ const Submit = () => {
                                    onChange={(e) => setId(e.target.value)}/> */}
 
                         <br/>
-                           <select type="text" className="form-control" name="taxi_type" placeholder="Select a taxi type">
+                           <select type="text" className="form-control" name="Submission_category" placeholder="Select a Submisson type" onChange={(e) => setSubmission_category(e.target.value)}>
                                <option disabled selected = "true">--Select a Submisson Type--</option>
                                <option type="text" className="form-control"value= "Project Proposal"  >Project Proposal</option>
-                               <option type="text" className="form-control" value="Progress Presentation" >Progress presentation </option>
+                               <option type="text" className="form-control" value="Progress Presentation" >Progress Presentation </option>
                                <option type="text" className="form-control" value="Final Report" >Final Report</option>
                                <option type="text" className="form-control"value= "Research Project"  >Research Project</option>
                                <option type="text" className="form-control" value="Thesis" >Thesis </option>

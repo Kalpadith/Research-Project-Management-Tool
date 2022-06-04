@@ -6,8 +6,8 @@ import {Button} from "@mui/material";
 
 const Login = () => {
     // JUST FOR DEV SPREED
-    const [email, setEmail] = useState("thusithanjana.t@sliit.lk");
-    const [password, setPassword] = useState("D59878r6");
+    const [email, setEmail] = useState("tharushi@gmail.com");
+    const [password, setPassword] = useState("Tharushi123");
 
     const navigate = useNavigate()
 

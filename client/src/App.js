@@ -19,6 +19,7 @@ import Pmember from "./pages/private/components/member_details";
 import MemberG from "./pages/private/components/member-group";
 import MemberM from "./pages/private/components/member-manage";
 import MemberV from "./pages/private/components/presentation-view";
+import Create_grp from "./pages/private/components/creategrp"
 
 
 
@@ -43,7 +44,7 @@ const App = () => {
                     <Route path="Reg_Research_Topic" element={<Reg_Research_Topic/>}/>
                     <Route path="Request_Supervisor" element={<Request_Supervisor/>}/>
                     <Route path="Submit" element={<Submit/>}/>
-                    
+                    <Route path="creategrp" element={<Create_grp />} />
                 </Route>
                 <Route path="Pmember" element={<Pmember/>}/>
                 <Route path="MemberG" element={<MemberG/>}/>

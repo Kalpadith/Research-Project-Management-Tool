@@ -24,16 +24,7 @@ import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 
 import {Link, Outlet, useParams} from 'react-router-dom';
-import {
-    Avatar,
-    AvatarGroup,
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle
-} from "@mui/material";
+import {Avatar, AvatarGroup} from "@mui/material";
 import {useEffect} from "react";
 import axios from "axios";
 import store from '@core/store';
@@ -84,7 +75,6 @@ const DrawerHeader = styled('div')(({theme}) => ({
     ...theme.mixins.toolbar,
 }));
 
-
 export default function Layout() {
 
     const {id} = useParams();
@@ -92,7 +82,6 @@ export default function Layout() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
     const [users, setUsers] = React.useState([]);
-    const [project, setProject] = React.useState({});
 
     const userRole = sessionStorage.getItem('role');
 
@@ -113,21 +102,6 @@ export default function Layout() {
             setUsers(store.getState().groupUserHome.users);
         })
 
-        axios.get('/research/' + id)
-            .then(res => {
-                if (res.status === 200) {
-                    setProject(res.data)
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
-
-        store.subscribe(() => {
-            setUsers(store.getState().groupUserHome.users);
-        })
-
-
     }, []);
 
 
@@ -140,67 +114,53 @@ export default function Layout() {
     };
 
 
-    const [supervisorApprovalOpen, setSupervisorApprovalOpen] = React.useState(false);
-
-    const supervisorApprovalOpenOpen = () => {
-        setSupervisorApprovalOpen(true);
-    };
-
-    const supervisorApprovalOpenClose = () => {
-        setSupervisorApprovalOpen(false);
-    };
-
-
-    function onTopicSubmit() {
-        axios.post('/groups/acceptTopic', {
-            id: id,
-        }).then(res => {
-            if (res.status === 200 && res.data != null) {
-                setProject(res.data);
-                supervisorApprovalOpenClose();
-            }
-        });
-
-
-    }
-
-
-    const studentNav = () => {
+    const studentNav = ()=>{
         return (
             <>
                 <List>
 
-                    <Link to='./Request_Supervisor' className='text-link'>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <ScheduleSendIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary={'Request Supervisor / Co-Supervisor'}/>
-                            </ListItemButton>
-                        </ListItem>
+                <Link to='./Request_Supervisor' className='text-link'>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <ScheduleSendIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Request Supervisor / Co-Supervisor'}/>
+                        </ListItemButton>
+                    </ListItem>
                     </Link>
 
-                    <Link to='./Reg_Research_Topic' className='text-link'>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <ScheduleSendIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary={'Register Research Topic '}/>
-                            </ListItemButton>
-                        </ListItem>
+                <Link to='./Reg_Research_Topic' className='text-link'>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <ScheduleSendIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Register Research Topic '}/>
+                        </ListItemButton>
+                    </ListItem>
                     </Link>
 
                     <Link to='./Submit' className='text-link'>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <AutoAwesomeMotionIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary={'Submission'}/>
-                            </ListItemButton>
-                        </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <AutoAwesomeMotionIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Submission'}/>
+                        </ListItemButton>
+                    </ListItem>
+                    </Link>
+
+                    <Link to='./creategrp' className='text-link'>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <AutoAwesomeMotionIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Create Group'}/>
+                        </ListItemButton>
+                    </ListItem>
                     </Link>
 
                 </List>
@@ -208,163 +168,135 @@ export default function Layout() {
         )
     }
 
-    const supervisorNav = () => {
-        return (
+    const supervisorNav = ()=> {
+        return(
             <>
+
+
                 <List>
-                    <Link to='./submission-list' className='text-link'>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <AutoAwesomeMotionIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary={'Submission List'}/>
-                            </ListItemButton>
-                        </ListItem>
-                    </Link>
 
                     <ListItem disablePadding>
-                        <ListItemButton onClick={supervisorApprovalOpenOpen}>
+                        <ListItemButton>
                             <ListItemIcon>
                                 <BookmarkAddedIcon/>
                             </ListItemIcon>
-                            <ListItemText primary={'Accept Topic'}/>
+                            <ListItemText primary={'Evaluation'}/>
                         </ListItemButton>
                     </ListItem>
 
                 </List>
+
+
             </>
         )
     }
 
 
+
     return (
-        <>
-            <Box sx={{display: 'flex'}}>
-                <CssBaseline/>
+        <Box sx={{display: 'flex'}}>
+            <CssBaseline/>
 
-                <AppBar style={{backgroundColor: '#fff', color: '#000'}} position="fixed" open={open}>
-                    <Toolbar>
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={handleDrawerOpen}
-                            edge="start"
-                            sx={{mr: 2, ...(open && {display: 'none'})}}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography variant="caption" noWrap component="div">
-                            Supervisor Approval : <span
-                            className={project.supervisor_approval === 'Approved' ? 'text-success' : 'text-warning'}>{project.supervisor_approval}</span>
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
+            <AppBar position="fixed" open={open}>
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        sx={{mr: 2, ...(open && {display: 'none'})}}
+                    >
+                        <MenuIcon/>
+                    </IconButton>
+                    <Typography variant="h6" noWrap component="div">
+                        {id}
+                    </Typography>
+                </Toolbar>
+            </AppBar>
 
-                <Drawer
-                    sx={{
+            <Drawer
+                sx={{
+                    width: drawerWidth,
+                    flexShrink: 0,
+                    '& .MuiDrawer-paper': {
                         width: drawerWidth,
-                        flexShrink: 0,
-                        '& .MuiDrawer-paper': {
-                            width: drawerWidth,
-                            boxSizing: 'border-box',
-                        },
-                    }}
-                    variant="persistent"
-                    anchor="left"
-                    open={open}
-                >
-                    <DrawerHeader>
-                        <div className='d-flex justify-content-between'>
-                            <div>
-                                <Typography variant="caption" noWrap component="div" className='mt-2'>
-                                    <b>Members</b>
-                                </Typography>
-                                <AvatarGroup max={4}>
-                                    {users.map(user => (
-                                        <Avatar key={user._id} alt={user.user_Fname} src={user.user_avatar}/>
-                                    ))}
-                                </AvatarGroup>
-                            </div>
-                            <IconButton
-                                style={{backgroundColor: 'transparent'}} onClick={handleDrawerClose}>
-                                {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
-                            </IconButton>
+                        boxSizing: 'border-box',
+                    },
+                }}
+                variant="persistent"
+                anchor="left"
+                open={open}
+            >
+                <DrawerHeader>
+                    <div className='d-flex justify-content-between'>
+                        <div>
+                            <Typography variant="caption" noWrap component="div" className='mt-2'>
+                                <b>Members</b>
+                            </Typography>
+                            <AvatarGroup max={4}>
+                                {users.map(user => (
+                                    <Avatar key={user._id} alt={user.user_Fname} src={user.user_avatar}/>
+                                ))}
+                            </AvatarGroup>
                         </div>
+                        <IconButton
+                            style={{backgroundColor: 'transparent'}} onClick={handleDrawerClose}>
+                            {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
+                        </IconButton>
+                    </div>
 
 
-                    </DrawerHeader>
-                    <Divider/>
-                    <List>
-                        <Link to={'/user-group/' + id} className='text-link'>
-                            <ListItem disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <SummarizeIcon/>
-                                    </ListItemIcon>
-                                    <ListItemText primary={'Details'}/>
-                                </ListItemButton>
-                            </ListItem>
-                        </Link>
+                </DrawerHeader>
+                <Divider/>
+                <List>
+                    <Link to={'/user-group/'+id} className='text-link'>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <SummarizeIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Details'}/>
+                        </ListItemButton>
+                    </ListItem>
+                    </Link>
 
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <SettingsApplicationsIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Settings'}/>
+                        </ListItemButton>
+                    </ListItem>
+                </List>
+                <Divider/>
+
+                {userRole === 'supervisor' ? supervisorNav() : studentNav()}
+
+                <Divider/>
+
+                <List>
+                    <Link to='./chat' className='text-link'>
                         <ListItem disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <SettingsApplicationsIcon/>
+                                    <ChatIcon/>
                                 </ListItemIcon>
-                                <ListItemText primary={'Settings'}/>
+                                <ListItemText primary={'Chat'}/>
                             </ListItemButton>
                         </ListItem>
-                    </List>
-                    <Divider/>
-
-                    {userRole === 'supervisor' ? supervisorNav() : studentNav()}
-
-                    <Divider/>
-
-                    <List>
-                        <Link to='./chat' className='text-link'>
-                            <ListItem disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <ChatIcon/>
-                                    </ListItemIcon>
-                                    <ListItemText primary={'Chat'}/>
-                                </ListItemButton>
-                            </ListItem>
-                        </Link>
-                    </List>
+                    </Link>
+                </List>
 
 
-                </Drawer>
+            </Drawer>
 
 
-                <Main open={open}>
-                    <DrawerHeader/>
-                    <Outlet/>
-                </Main>
-            </Box>
-
-            {/*Dialog Box*/}
-
-            <Dialog
-                open={supervisorApprovalOpen}
-                keepMounted
-                onClose={supervisorApprovalOpenClose}
-                aria-describedby="alert-dialog-slide-description"
-            >
-                <DialogTitle>{"Do you really want to approve this topic?"}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description">
-                        Ones you accept, supervisor accept status will be set as Approved
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={supervisorApprovalOpenClose}>Disagree</Button>
-                    <Button onClick={onTopicSubmit}>Agree</Button>
-                </DialogActions>
-            </Dialog>
-
-        </>
+            <Main open={open}>
+                <DrawerHeader/>
+                <Outlet/>
+                <CurrentUserDetails/>
+            </Main>
+        </Box>
     );
 }
