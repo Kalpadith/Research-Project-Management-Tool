@@ -2,7 +2,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-const AddOrUpdateUser = ({users,hideModel}) => {
+const AddOrUpdateUser = ({users,hideModal}) => {
 
     if(!users)
     users = {};
@@ -55,7 +55,7 @@ const AddOrUpdateUser = ({users,hideModel}) => {
                 user_password: user_password,
                 student_id: student_id
             });
-            hideModel({});
+            hideModal({});
         } else {
             await axios.post(`/users/add`, {
                 user_Fname: user_Fname,
@@ -67,7 +67,7 @@ const AddOrUpdateUser = ({users,hideModel}) => {
                 user_password: user_password,
                 student_id: student_id
             });
-            hideModel();
+            hideModal();
         }
     }
 
@@ -82,7 +82,7 @@ const AddOrUpdateUser = ({users,hideModel}) => {
                                type="text"
                                disabled={!!users.user_id}
                                value={user_id}
-                               onChange={(e) => setHotelId(e.target.value)}/>
+                               onChange={(e) => setuser_id(e.target.value)}/>
                     </div>
                     <div className="mb-3">
                         <label className="form-label">First Name</label>

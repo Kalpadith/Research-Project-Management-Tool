@@ -23,12 +23,12 @@ export const getEvaluation = async (req, res) => {
 }
 
 export const addEvaluation = async (req, res) => {
-    const { studentGroupId, submissionId, marks} = req.body;
+    const { marks, comment} = req.body;
     const newEvaluation = new Evaluations(
         {
-            studentGroupId,
-            submissionId,
-            marks
+
+            marks,
+            comment
         });
 
     try {
@@ -42,11 +42,11 @@ export const addEvaluation = async (req, res) => {
 
 export const updateEvaluation = async (req, res) => {
     const { id } = req.params;
-    const {  studentGroupId, submissionId, marks } = req.body;
+    const {  marks, comment } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    const updatedEvaluation = { studentGroupId, submissionId, marks, _id: id };
+    const updatedEvaluation = {  marks, comment,  _id: id };
 
     await Evaluations.findByIdAndUpdate(id, updatedEvaluation, { new: true });
 

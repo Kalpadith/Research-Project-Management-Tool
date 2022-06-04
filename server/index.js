@@ -11,6 +11,7 @@ import researchRoutes from './routes/research_r.js'
 import groupRoutes from './routes/group_r.js'
 import markingRoutes from './routes/marking_r.js'
 import submissiontypeRoutes from './routes/submissionType_r.js'
+import presentationRoutes from './routes/presentation_r.js'
 
 import http from 'http';
 import { Server } from "socket.io";
@@ -37,9 +38,10 @@ app.use('/research', researchRoutes);
 app.use('/groups', groupRoutes);
 app.use('/marking', markingRoutes);
 app.use('/submissionType', submissiontypeRoutes);
+app.use('/presentation', presentationRoutes);
 
 
-const URL = 'mongodb+srv://IshanKalpadith:tKi26393IIReumKR@researchprojectmanageme.n1iby.mongodb.net/Project_Management_Tool?retryWrites=true&w=majority';
+const URL = 'mongodb+srv://MisharaSamadhi:hewage123@researchprojectmanageme.n1iby.mongodb.net/Project_Management_Tool?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
 
 

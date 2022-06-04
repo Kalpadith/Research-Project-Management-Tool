@@ -118,7 +118,7 @@ export default function Layout() {
         return (
             <>
                 <List>
-                    <Link to='/add' className='text-link'>
+                    <Link to='./add' className='text-link'>
                     <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
@@ -129,23 +129,7 @@ export default function Layout() {
                     </ListItem>
                     </Link>
 
-                    {/* <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <ScheduleSendIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary={'Request Co-Supervisor'}/>
-                        </ListItemButton>
-                    </ListItem>
-
-                    <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <AutoAwesomeMotionIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary={'Submission'}/>
-                        </ListItemButton>
-                    </ListItem> */}
+                   
 
 
                 </List>
@@ -236,7 +220,7 @@ export default function Layout() {
                 <Divider/>
 
                  <List>
-                    <Link to='/all' className='text-link'>
+                    <Link to='./all' className='text-link'>
                         <ListItem disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>

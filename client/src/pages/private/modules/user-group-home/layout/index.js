@@ -152,6 +152,17 @@ export default function Layout() {
                     </ListItem>
                     </Link>
 
+                    <Link to='./creategrp' className='text-link'>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <AutoAwesomeMotionIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Create Group'}/>
+                        </ListItemButton>
+                    </ListItem>
+                    </Link>
+
                 </List>
             </>
         )

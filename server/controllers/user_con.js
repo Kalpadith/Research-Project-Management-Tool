@@ -31,29 +31,12 @@ export const login = async (req, res) => {
 export const getusers = async (req, res) => {
     try {
         const user = await Users.find();
-        res.status(200).json(user)
 
+        res.status(200).json(user);
     } catch (error) {
         res.status(404).json({message: error.message});
     }
 }
-
-
-// export const getusers = async (req, res) => {
-//     try {
-//         const data = await Users.find()
-
-//         return res.status(200).json({
-//             success:true,
-//             data:data
-//         });
-
-//     } catch (error) {
-//         return res.status(404).json({message: error.message});
-//     }
-// }
-
-
 
 export const getuser = async (req, res) => {
     const {id} = req.params;
@@ -84,11 +67,11 @@ export const adduser = async (req, res) => {
 
 export const updateuser = async (req, res) => {
     const {id} = req.params;
-    const {user_id, user_Fname, user_Lname, user_designation, user_role, user_phone, user_email, user_password, student_id} = req.body;
+    const {user_id, user_role, user_email, user_password} = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    const updateduser = {user_id, user_Fname, user_Lname, user_designation, user_role, user_phone, user_email, user_password, student_id, _id: id};
+    const updateduser = {user_id, user_role, user_email, user_password, _id: id};
 
     await Users.findByIdAndUpdate(id, updateuser, {new: true});
 
@@ -119,17 +102,3 @@ export const getUsersFromGroup = async (req, res) => {
 
 
 export default router;
-
-// export const getusers = async (req, res) => {
-//     try {
-//         const data = await Users.find()
-
-//         return res.status(200).json({
-//             success:true,
-//             data:data
-//         });
-
-//     } catch (error) {
-//         return res.status(404).json({message: error.message});
-//     }
-// }

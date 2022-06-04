@@ -3,6 +3,7 @@ import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {Button} from "@mui/material";
+import Register from "./Register";
 
 const Login = () => {
     // JUST FOR DEV SPREED
@@ -35,8 +36,12 @@ const Login = () => {
                 sessionStorage.setItem('role', 'supervisor');
                 navigate('/supervisor')
             }
+            else if (result.data.user_role === 'Pannel_member'){
+                sessionStorage.setItem('role', 'Pannel_member');
+                navigate('/pannel-member')
+            }
             else {
-                // JUST FOR TESTING
+               
                 sessionStorage.setItem('role', 'student');
                 navigate('/student')
             }
@@ -70,6 +75,9 @@ const Login = () => {
                             disabled={!validateForm()}
                             variant="contained">
                         Submit
+                    </Button>
+                    <Button type="submit" className="btn btn-primary w-100" href="./reg">
+                        Signup                 
                     </Button>
 
                 </form>

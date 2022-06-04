@@ -38,9 +38,7 @@ const CurrentUserDetails = () => {
                       Email: {user.user_email}
                     </Typography>
 
-                    {/* <Typography variant="body2">
-                        {user.user_email} - <span> <b> {user.user_designation} </b> </span>
-                    </Typography> */}
+                    
                 </div>
             </div>
         </Card>
