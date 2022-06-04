@@ -41,8 +41,7 @@ const userSchema = mongoose.Schema({
         type: String
     },
     student_grpid: {
-        type: String,
-        required: true
+        type: String
     },
     assigned_groups: {
         type: String,
