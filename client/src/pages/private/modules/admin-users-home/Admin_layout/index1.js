@@ -29,8 +29,8 @@ import {useEffect} from "react";
 import axios from "axios";
 import store from '@core/store';
 import {add} from "../admin-user-home.reducer";
-import AllUsers from '../../../components/allUsers';
-import AddOrUpdateUser from '../../../components/AddorUpdateUser';
+
+
 
 const drawerWidth = 260;
 
@@ -118,19 +118,38 @@ export default function Layout() {
         return (
             <>
                 <List>
-                    <Link to='./add' className='text-link'>
+                    <Link to='/add' className='text-link'>
                     <ListItem disablePadding>
                         <ListItemButton>
                             <ListItemIcon>
                                 <ScheduleSendIcon/>
                             </ListItemIcon>
-                            <ListItemText primary={'Add User'}/>
+                            <ListItemText primary={'Create submission types'}/>
                         </ListItemButton>
                     </ListItem>
                     </Link>
 
-                   
+                    <Link to='./Marking' className='text-link'>
+                     <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <ScheduleSendIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Create Marking schemes'}/>
+                        </ListItemButton>
+                    </ListItem>
+                    </Link>
 
+                    <Link to='./Template' className='text-link'>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <AutoAwesomeMotionIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Upload Templates'}/>
+                        </ListItemButton>
+                    </ListItem> 
+                    </Link>
 
                 </List>
             </>
@@ -219,19 +238,7 @@ export default function Layout() {
 
                 <Divider/>
 
-                 <List>
-                    <Link to='./all' className='text-link'>
-                        <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <ChatIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary={'users'}/>
-                            </ListItemButton>
-                        </ListItem>
-                    </Link>
-                </List> 
-
+                 
 
             </Drawer>
 
@@ -239,7 +246,7 @@ export default function Layout() {
             <Main open={open}>
                 <DrawerHeader/>
                 <Outlet/>
-                <AllUsers/>
+               
             </Main>
             
         </Box>

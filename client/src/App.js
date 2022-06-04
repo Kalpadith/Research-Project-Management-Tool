@@ -2,12 +2,15 @@ import * as React from "react";
 import "./styles.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Login from "./pages/common/login";
+import Register from "./pages/common/Register";
 import Supervisor from "./pages/private/modules/supervisor/index";
 import Layout from "./pages/private/modules/user-group-home/layout";
 import Chat from "./pages/private/modules/user-group-home/pages/chat";
 import Student from "./pages/private/modules/student/index";
 import Admin from "./pages/private/modules/admin/index";
 import Admin_layout from "./pages/private/modules/admin-users-home/Admin_layout/index";
+import Admin_layout1 from "./pages/private/modules/admin-users-home/Admin_layout/index1";
+import Admin_layout2 from "./pages/private/modules/admin-users-home/Admin_layout/index2";
 import PannelMember from "./pages/private/modules/pannel-member/index";
 import PanelNav from "./pages/private/modules/Pannel_layout/index";
 import AllUsers from "./pages/private/components/allUsers";
@@ -19,7 +22,9 @@ import Pmember from "./pages/private/components/member_details";
 import MemberG from "./pages/private/components/member-group";
 import MemberM from "./pages/private/components/member-manage";
 import MemberV from "./pages/private/components/presentation-view";
-import Create_grp from "./pages/private/components/creategrp"
+import Create_grp from "./pages/private/components/creategrp";
+import Template from "./pages/private/components/Template";
+import Marking from "./pages/private/components/marking";
 
 
 
@@ -49,12 +54,21 @@ const App = () => {
                 <Route path="Pmember" element={<Pmember/>}/>
                 <Route path="MemberG" element={<MemberG/>}/>
 
-                <Route path="user-list" element={<Admin_layout/>}/>
+                <Route path="user-list" element={<Admin_layout/>}>
                 <Route path="all" element={<AllUsers/>}/>
                 <Route path="add" element={<AddOrUpdateUser/>}/>
+                </Route>
             
+                <Route path="upload-list" element={<Admin_layout1/>}>
+                <Route path="Template" element={<Template/>}/>
+                <Route path="Marking" element={<Marking/>}/>
+                </Route>
+            
+                <Route path="assign-panel" element={<Admin_layout2/>}>
+                </Route>
             
                 <Route path="*" element={<Login />} />
+                <Route path="/reg" element={<Register/>}/>
 
             </Routes>
         </div>

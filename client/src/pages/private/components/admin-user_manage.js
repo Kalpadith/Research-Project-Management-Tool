@@ -12,7 +12,10 @@ const User = ({user}) => {
         navigate('/user-list')
     }
     function onNavigate1() {
-        navigate('/user-list')
+        navigate('/upload-list')
+    }
+    function onNavigate2() {
+        navigate('/assign-panel')
     }
 
     return (
@@ -28,6 +31,9 @@ const User = ({user}) => {
                 <Button size="small" onClick={onNavigate}>More Actions</Button>
             </CardActions>
         </Card>
+
+     
+
         <Card sx={{ minWidth: 275 }}>
                 <CardContent>
 
@@ -39,7 +45,22 @@ const User = ({user}) => {
                 <CardActions>
                     <Button size="small" onClick={onNavigate1}>More Actions</Button>
                 </CardActions>
-            </Card></>
+            </Card>
+
+       
+
+            <Card sx={{ minWidth: 275 }}>
+            <CardContent>
+
+                <Typography variant="h5" component="div">
+                   Assign Panel members to Student groups
+                </Typography>
+
+            </CardContent>
+            <CardActions>
+                <Button size="small" onClick={onNavigate2}>More Actions</Button>
+            </CardActions>
+        </Card></>
         
 
     );

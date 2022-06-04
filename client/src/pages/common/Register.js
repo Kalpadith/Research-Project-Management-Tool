@@ -2,7 +2,7 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-const AddOrUpdateUser = ({users,hideModal}) => {
+const Register = ({users}) => {
 
     if(!users)
     users = {};
@@ -38,25 +38,25 @@ const AddOrUpdateUser = ({users,hideModal}) => {
     function validateForm() {
         if(users.user_id)
             return true;
-        return user_Fname.length > 0 && user_Lname.length > 0 && user_designation.length > 0 && user_phone.length > 0 && user_role.length > 0  && user_email.length > 0  && user_password.length > 0;
+        return user_Fname.length > 0 && user_Lname.length > 0 && user_designation.length > 0 && user_phone.length > 0 && user_role.length > 0  && user_email.length > 0  && user_password.length > 0 && student_id.length >0;
     }
 
     async function handleSubmit(event) {
         event.preventDefault();
 
-        if(users.user_id) {
-            await axios.patch(`/users/update?id=${users?._id}`, {
-                user_Fname: user_Fname,
-                user_Lname: user_Lname,
-                user_designation: user_designation,
-                user_role: user_role,
-                user_phone: user_phone,
-                user_email: user_email,
-                user_password: user_password,
-                student_id: student_id
-            });
-            hideModal({});
-        } else {
+        // if(users.user_id) {
+        //     await axios.patch(`/users/update?id=${users?._id}`, {
+        //         user_Fname: user_Fname,
+        //         user_Lname: user_Lname,
+        //         user_designation: user_designation,
+        //         user_role: user_role,
+        //         user_phone: user_phone,
+        //         user_email: user_email,
+        //         user_password: user_password,
+        //         student_id: student_id
+        //     });
+        //     hideModel({});
+        // } else {
             await axios.post(`/users/add`, {
                 user_Fname: user_Fname,
                 user_Lname: user_Lname,
@@ -67,9 +67,9 @@ const AddOrUpdateUser = ({users,hideModal}) => {
                 user_password: user_password,
                 student_id: student_id
             });
-            hideModal();
+            // hideModel();
         }
-    }
+    
 
 
     return (
@@ -137,11 +137,13 @@ const AddOrUpdateUser = ({users,hideModal}) => {
                         <label className="form-label">Student ID</label>
                         <input className="form-control" type="text"
                                value={student_id}
+                               placeholder= {"only for students"}
                                onChange={(e) => setstudent_id(e.target.value)}/>
                     </div>
 
-                    <button type="submit" className="btn btn-primary w-100" disabled={!validateForm()}>
-                        {users.user_id ? 'Update' : 'Add' }
+                    <button type="submit" className="btn btn-primary w-100" disabled={!validateForm()} href="*">
+                        {/* {users.user_id ? 'Update' : 'Add' } */}
+                        Register
                     </button>
 
 
@@ -151,4 +153,4 @@ const AddOrUpdateUser = ({users,hideModal}) => {
     )
 }
 
-export default AddOrUpdateUser;
+export default Register;

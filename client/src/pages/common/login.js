@@ -3,11 +3,12 @@ import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {Button} from "@mui/material";
+import Register from "./Register";
 
 const Login = () => {
     // JUST FOR DEV SPREED
-    const [email, setEmail] = useState("tharushi@gmail.com");
-    const [password, setPassword] = useState("Tharushi123");
+    const [email, setEmail] = useState("thusithanjana.t@sliit.lk");
+    const [password, setPassword] = useState("D59878r6");
 
     const navigate = useNavigate()
 
@@ -40,7 +41,7 @@ const Login = () => {
                 navigate('/pannel-member')
             }
             else {
-                // JUST FOR TESTING
+               
                 sessionStorage.setItem('role', 'student');
                 navigate('/student')
             }
@@ -74,6 +75,9 @@ const Login = () => {
                             disabled={!validateForm()}
                             variant="contained">
                         Submit
+                    </Button>
+                    <Button type="submit" className="btn btn-primary w-100" href="./reg">
+                        Signup                 
                     </Button>
 
                 </form>
